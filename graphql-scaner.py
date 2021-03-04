@@ -1,7 +1,9 @@
 import sys
 import argparse
 
-from public.query_runner import QueryRunner
+from public.cycles import CyclesDetector
+from public.utils import QueryRunner
+from public.schema import Schema
 
 
 def parse_args(args):
@@ -15,11 +17,16 @@ def parse_args(args):
         help='Authorization cookie'
     )
     parser.add_argument(
-        '-h', '--header',
+        '--header',
         help='HTTP headers',
         action='append'
     )
     return parser.parse_args(args)
+
+
+def print_cycles(cycles):
+    if len(cycles):
+        print('\n'.join(cycles))
 
 
 def main():
@@ -29,31 +36,12 @@ def main():
         print("You need to provide GraphQL endpoint url (-u)")
         exit(1)
 
-    QueryRunner.url = params.url
+    query_runner = QueryRunner(params.url, params.cookie, params.header)
+    schema = Schema(query_runner)
 
-    if params.cookie is not None:
-        cookie_dir = {}
-        for cookie in params.cookie:
-            splits = cookie.split('=', 1)
-            if len(splits) == 1:
-                cookie_dir[splits[0]] = ''
-            else:
-                cookie_dir[splits[0]] = splits[1]
-
-        QueryRunner.cookies = cookie_dir
-
-    if params.header is not None:
-        header_dir = {}
-        for header in params.header:
-            splits = header.split('=', 1)
-            if len(splits) == 1:
-                header_dir[splits[0]] = ''
-            else:
-                header_dir[splits[0]] = splits[1]
-
-        QueryRunner.headers = header_dir
-
-    #  TODO
+    # Циклические зависимости в схеме
+    cycles = CyclesDetector(schema).detect()
+    # queries = BrokenAccessControlDetector(query_runner).detect()
 
 
 if __name__ == '__main__':
