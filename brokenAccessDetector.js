@@ -13,7 +13,7 @@ const defaultValues = {
     'URI': "http://example.com/"
 };
 
-// Добавить справочник дефолтных значений
+// TODO: Добавить справочник дефолтных значений
 // stateful api testing
 
 async function checkRequests(path) {
