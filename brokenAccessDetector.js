@@ -13,6 +13,9 @@ const defaultValues = {
     'URI': "http://example.com/"
 };
 
+// Добавить справочник дефолтных значений
+// stateful api testing
+
 async function checkRequests(path) {
     const files = fs.readdirSync(path)
         .filter(file => file.includes('.gql'))

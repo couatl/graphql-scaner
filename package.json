@@ -1,0 +1,27 @@
+{
+  "name": "graphql-scaner",
+  "version": "1.0.0",
+  "description": "TODO: - [x] Чтение схемы приложения     - [x] Отправка introspection query     - [x] Парсинг ответа, построение графа (визуализация?)     С помощью https://github.com/sheerun/graphqlviz - [x] Нахождение циклов в схеме - [ ] Нахождение точек входа без авторизации     - [ ] Простукивать каждую ручку без заголовка авторизации     - [ ] Нахождение SQL injection     - [ ] По схеме искать текстовые инпуты, на вход подавать стандартные sql-сообщения",
+  "main": "introspectionToSchema.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/couatl/graphql-scaner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/couatl/graphql-scaner/issues"
+  },
+  "homepage": "https://github.com/couatl/graphql-scaner#readme",
+  "dependencies": {
+    "gql-generator": "^1.0.12",
+    "graphql": "^15.5.0",
+    "graphql-request": "^3.4.0"
+  }
+}

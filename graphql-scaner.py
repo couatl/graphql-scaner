@@ -1,6 +1,7 @@
 import sys
 import argparse
 
+from public.access import BrokenAccessControlDetector
 from public.cycles import CyclesDetector
 from public.utils import QueryRunner
 from public.schema import Schema
@@ -41,7 +42,8 @@ def main():
 
     # Циклические зависимости в схеме
     cycles = CyclesDetector(schema).detect()
-    # queries = BrokenAccessControlDetector(query_runner).detect()
+    # Проверка на доступность
+    queries = BrokenAccessControlDetector(query_runner).detect()
 
 
 if __name__ == '__main__':
